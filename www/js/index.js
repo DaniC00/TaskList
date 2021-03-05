@@ -22,14 +22,21 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 
 
+//var tasks = ["1","2","3"];
 var tasks;
+var nameTask;
 
-loadList(){
+//localStorage.setItem('taskList', JSON.stringify(tasks));
+
+
+
+function loadList(){
 	tasks = JSON.parse(localStorage.getItem('taskList'));
 	
 	for(i = 0; i<tasks.length; i++){
-		$('#taskList').append('<li><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" href="#">'+nameTask+'</a></li>');
+		$('#taskList').append('<li><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" href="#">'+tasks[i]+'</a></li>');
 	}
+
 	$('#taskList').listview("refresh");
 
 }
@@ -46,17 +53,16 @@ function onDeviceReady() {
 
 function addItemTaskList(){
 
-	var nameTask = "DefaultName"
-
+	nameTask = ""
 	nameTask = $('#inputAdd').val();
 
 	tasks = JSON.parse(localStorage.getItem('taskList'));
 
-	tasks.push(taskName);
+	tasks.push(nameTask);
 	localStorage.setItem('taskList', JSON.stringify(tasks));
 
-	$('#listview').empty();
-	loadData();
+	$('#taskList').empty();
+	loadList();
 
 }
 
